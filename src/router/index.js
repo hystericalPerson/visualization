@@ -13,8 +13,12 @@ const routes = [{
         component: () => import('../views/systemConfigInfo/index.vue')
     }, {
         path: '/',
-        name: 'lowCode',
-        component: () => import('../views/lowCode/index.vue')
+        name: 'home',
+        component: () => import('../views/home/index.vue')
+    }, {
+        path: '/flow',
+        name: 'flow',
+        component: () => import('../views/flow/index.vue')
     }]
     // component: () => import('../views/home/index.vue')
 }, {
