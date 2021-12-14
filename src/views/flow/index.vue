@@ -1,5 +1,7 @@
 <template>
-    <X6Flow ref="flowRef"></X6Flow>
+    <div class="content">
+        <X6Flow ref="flowRef" class="x6-flow"></X6Flow>
+    </div>
 </template>
 <script>
 import X6Flow from '@/components/X6Flow/index.vue'
@@ -17,3 +19,12 @@ export default {
     }
 }
 </script>
+<style lang="less" scoped>
+.content{
+    padding: 20px;
+    height: 100%;
+    .x6-flow{
+        border: 1px solid #E6E6E6;
+    }
+}
+</style>

@@ -1,8 +1,14 @@
 <template>
-    <div class="content">
-        <Dnd class="dnd" :ref="refDnd"></Dnd>
+    <div class="x6-content">
+        <Dnd class="dnd" ref="refDnd"></Dnd>
         <Graph class="graph" :graphId="graphId" ref="refGraph"></Graph>
-        <NoteInfo class="noteInfo" ref="refNodeInfo"></NoteInfo>
+        <div class="noteInfo">
+            <div class="btn-box">
+                <a-button type='primary' @click="saveNodeList" v-if="flow.nodeInfo">保存节点</a-button>
+                <a-button type='primary' @click="saveFlowList">保存流程</a-button>
+            </div>
+            <NoteInfo ref="refNodeInfo"></NoteInfo>
+        </div>
     </div>
 </template>
 <script>
@@ -10,7 +16,7 @@ import { reactive, ref } from '@vue/reactivity'
 import Dnd from './components/dnd/index.vue'
 import Graph from './components/graph/index.vue'
 import NoteInfo from './components/noteInfo/index.vue'
-import { provide } from '@vue/runtime-core'
+import { onMounted, provide } from '@vue/runtime-core'
 export default {
     components: {
         Dnd,
@@ -33,24 +39,41 @@ export default {
         const flow = reactive({
             graph: null,
             dnd: null,
-            nodeInfo: null
+            nodeInfo: null,
+            allNodeData: {}
         })
         provide('flow', flow)
+
+        onMounted(() => {
+            refGraph.value.init()
+            refDnd.value.init()
+        })
+
+        // 保存节点
+        const saveNodeList = () => {
+            refDnd.value.addNodeList()
+        }
+
+        // 保存流程
+        const saveFlowList = () => {
+            refDnd.value.addFlowList()
+        }
 
         return {
             refDnd,
             refGraph,
             refNodeInfo,
-            flow
+            flow,
+            saveNodeList,
+            saveFlowList
         }
     }
 }
 </script>
 <style lang="less" scoped>
-.content{
+.x6-content{
     display: flex;
     height: 100%;
-    padding: 20px;
     .dnd{
         width: 300px;
     }
@@ -59,6 +82,11 @@ export default {
     }
     .noteInfo{
         width: 300px;
+    }
+    .btn-box{
+        margin: 20px 0;
+        display: flex;
+        justify-content: space-around;
     }
 }
 </style>
