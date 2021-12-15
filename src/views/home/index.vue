@@ -14,9 +14,12 @@ import { notification } from 'ant-design-vue'
 import { useRouter } from 'vue-router'
 const data = [{
     title: '流程图',
-    desc: 'antv/x6'
+    desc: 'antv/x6',
+    path: '/flow'
 }, {
-    title: 'Title 2'
+    title: '可视化配置搜索栏',
+    desc: 'vue3',
+    path: '/search'
 }, {
     title: 'Title 3'
 }, {
@@ -27,7 +30,7 @@ export default {
         const router = useRouter()
         const onJumpPage = (item) => {
             if (item.desc) {
-                router.push('/flow')
+                router.push(item.path)
             } else {
                 notification.open({
                     message: '提示',

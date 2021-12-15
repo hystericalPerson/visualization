@@ -21,7 +21,6 @@ export default {
 </script>
 <style lang="less" scoped>
 .content{
-    padding: 20px;
     height: 100%;
     .x6-flow{
         border: 1px solid #E6E6E6;

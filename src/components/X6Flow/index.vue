@@ -74,6 +74,7 @@ export default {
 .x6-content{
     display: flex;
     height: 100%;
+    background: white;
     .dnd{
         width: 300px;
     }

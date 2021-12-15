@@ -19,6 +19,10 @@ const routes = [{
         path: '/flow',
         name: 'flow',
         component: () => import('../views/flow/index.vue')
+    }, {
+        path: '/search',
+        name: 'search',
+        component: () => import('../views/search/index.vue')
     }]
     // component: () => import('../views/home/index.vue')
 }, {
