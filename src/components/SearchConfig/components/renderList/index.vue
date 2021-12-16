@@ -1,27 +1,35 @@
 <template>
     <div class="render-box">
-        <a-form>
-            <a-row :gutter="[configInfo.layoutConfig.horizontalGutter, configInfo.layoutConfig.verticalGutter]">
-                <a-col v-for="item in configInfo.renderList" :key="item.type" :span="24/configInfo.layoutConfig.columnCount">
-                    <div>
-                         <a-form-item  :label="item.placeholder || '默认标题'" v-if="configInfo.layoutConfig.isLabel">
-                            <a-input :size="configInfo.layoutConfig.size" :disabled="true"></a-input>
-                        </a-form-item>
-                        <a-input :size="configInfo.layoutConfig.size" :disabled="true" v-else :placeholder="item.placeholder || '默认标题'"></a-input>
-                    </div>
-                </a-col>
-            </a-row>
-        </a-form>
+        <div style="margin-top:50px">构建</div>
+        <SearchCode :layout="configInfo.layoutConfig" :list="configInfo.renderList" :isConfig="true"></SearchCode>
+        <div style="margin-top:50px" @click="test">预览</div>
+        <SearchCode :layout="configInfo.layoutConfig" :list="configInfo.renderList" v-if="testData"></SearchCode>
     </div>
 </template>
 <script>
-import { inject } from '@vue/runtime-core'
+import { inject, provide, ref } from '@vue/runtime-core'
+import SearchCode from '@/components/SearchCode/index.vue'
 export default {
+    components: {
+        SearchCode
+    },
     setup () {
         const configInfo = inject('configInfo')
 
+        const setDomConfig = (data) => {
+            configInfo.domConfig = data
+        }
+        provide('setDomConfig', setDomConfig)
+
+        const testData = ref(false)
+        const test = () => {
+            testData.value = !testData.value
+        }
+
         return {
-            configInfo
+            configInfo,
+            test,
+            testData
         }
     }
 }

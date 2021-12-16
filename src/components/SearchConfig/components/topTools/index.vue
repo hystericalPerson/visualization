@@ -1,14 +1,37 @@
 <template>
     <div class="top-content">
-        <a-button class="button">预览</a-button>
-        <a-button class="button" type="primary">生成布局配置文件</a-button>
-        <a-button class="button" type="primary">导出表单配置</a-button>
+        <div>
+            <a-button class="button" @click="onPreview">预览</a-button>
+            <a-button class="button" type="primary">导出布局配置</a-button>
+            <a-button class="button" type="primary">导出表单配置</a-button>
+        </div>
+        <a-modal
+            v-model:visible="visible"
+            title="预览"
+            width="100%"
+            wrap-class-name="full-modal"
+            :footer="null"
+        >
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+            <p>Some contents...</p>
+        </a-modal>
     </div>
 </template>
 <script>
+import { ref } from '@vue/reactivity'
 export default {
     setup () {
+        const visible = ref(false)
 
+        const onPreview = () => {
+            visible.value = true
+        }
+
+        return {
+            visible,
+            onPreview
+        }
     }
 }
 </script>
@@ -20,5 +43,23 @@ export default {
     .button{
         margin-right: 10px;
     }
+}
+</style>
+<style lang="less">
+.full-modal{
+  .ant-modal {
+    max-width: 100%;
+    top: 0;
+    padding-bottom: 0;
+    margin: 0;
+  }
+  .ant-modal-content {
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh);
+  }
+  .ant-modal-body {
+    flex: 1;
+  }
 }
 </style>

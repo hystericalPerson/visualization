@@ -6,14 +6,17 @@
             <p :class="{active: tab === 'dom'}" @click="onChangeTab('dom')">元素配置</p>
         </div>
         <LayoutConfig v-if="tab === 'layout'"></LayoutConfig>
+        <DomConfig v-else></DomConfig>
     </div>
 </template>
 <script>
 import { inject, ref } from '@vue/runtime-core'
 import LayoutConfig from './layoutConfig.vue'
+import DomConfig from './domConfig/index.vue'
 export default {
     components: {
-        LayoutConfig
+        LayoutConfig,
+        DomConfig
     },
     setup () {
         const configInfo = inject('configInfo')

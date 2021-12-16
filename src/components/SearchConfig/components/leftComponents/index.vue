@@ -15,12 +15,25 @@ export default {
             name: '输入框(input)',
             type: 'input'
         }])
+        // key的子增加索引
+        let valueIndex = 1
 
         const configInfo = inject('configInfo')
 
+        const setInput = (data) => {
+            data.inputType = 'text'
+            data.isSection = false
+        }
+
         const onAddRenderList = (item) => {
+            const typeFn = {
+                input: setInput
+            }
             const cloneItem = cloneDeep(item)
             delete cloneItem.name
+            cloneItem.key = `value${valueIndex++}`
+            cloneItem.isExtend = false
+            typeFn[item.type] && typeFn[item.type](cloneItem)
             configInfo.renderList.push(cloneItem)
         }
 

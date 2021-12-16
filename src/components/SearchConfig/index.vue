@@ -26,7 +26,8 @@ export default {
     setup () {
         const configInfo = reactive({
             renderList: [],
-            layoutConfig: defaultLayoutConfig
+            layoutConfig: defaultLayoutConfig,
+            domConfig: null
         })
         provide('configInfo', configInfo)
 

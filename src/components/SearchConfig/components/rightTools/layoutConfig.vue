@@ -22,7 +22,7 @@
         </div>
         <div class="config-info">
             <p class="title">默认大小</p>
-              <a-select
+            <a-select
                 v-model:value="configInfo.layoutConfig.size"
                 style="width:100%"
             >
