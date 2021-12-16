@@ -15,6 +15,7 @@ import RenderList from './components/renderList/index.vue'
 import RightTools from './components/rightTools/index.vue'
 import { reactive } from '@vue/reactivity'
 import { provide } from '@vue/runtime-core'
+import defaultLayoutConfig from './config/defaultLayoutConfig'
 export default {
     components: {
         TopTools,
@@ -25,11 +26,7 @@ export default {
     setup () {
         const configInfo = reactive({
             renderList: [],
-            layoutConfig: {
-                columnCount: 4, // 一行几个
-                verticalGutter: 4, // 垂直间距
-                horizontalGutter: 16 // 水平间距
-            }
+            layoutConfig: defaultLayoutConfig
         })
         provide('configInfo', configInfo)
 
