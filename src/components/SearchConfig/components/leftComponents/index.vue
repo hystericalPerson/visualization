@@ -24,10 +24,9 @@ export default {
         const onAddRenderList = (item) => {
             const cloneItem = cloneDeep(item)
             cloneItem.key = `value${valueIndex++}`
-            cloneItem.isExtend = false
-            // typeFn[item.type] && typeFn[item.type](cloneItem)
             configInfo.renderList.push({
                 ...cloneItem,
+                ...defaultDomConfig.common,
                 ...defaultDomConfig[item.type]
             })
         }
@@ -40,15 +39,25 @@ export default {
 }
 </script>
 <style lang="less" scoped>
+@import "~ant-design-vue/lib/style/index";
 .module{
     width: 100%;
-    height: 40px;
+    height: 60px;
     padding: 0 15px;
     display: flex;
     align-items: center;
+    justify-content: space-around;
     .title{
+        width: 110px;
+        height: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         font-size: 16px;
         font-weight: bold;
+        color: @primary-color;
+        margin-bottom: 0;
+        border: 1px solid @primary-color;
         cursor: pointer;
     }
 }

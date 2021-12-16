@@ -1,9 +1,9 @@
 <template>
     <div class="render-box">
          <a-form>
-            {{configInfo.renderList}}
+            <!-- {{configInfo.renderList}} -->
             <a-row :gutter="[configInfo.layoutConfig.horizontalGutter, configInfo.layoutConfig.verticalGutter]">
-                <a-col v-for="item in configInfo.renderList" :key="item.type" :span="24/configInfo.layoutConfig.columnCount">
+                <a-col v-for="item in configInfo.renderList" :key="item.type" :span="(item.isCustomWidth && item.customWidth) || (24/configInfo.layoutConfig.columnCount)">
                     <div @click="onClickFormItem(item)" :class="{isActive: item.key === isActiveKey }">
                         <component :is="item.type + 'Components'" :config="item"></component>
                     </div>

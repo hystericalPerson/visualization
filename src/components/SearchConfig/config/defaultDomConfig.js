@@ -1,5 +1,10 @@
 
 const config = {
+    common: {
+        isExtend: false,
+        isCustomWidth: false,
+        customWidth: 6
+    },
     input: {
         inputType: 'text',
         isSection: false,

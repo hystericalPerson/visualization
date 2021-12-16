@@ -16,6 +16,18 @@
                 <a-radio :value="false">否</a-radio>
             </a-radio-group>
         </div>
+        <div class="config-info">
+            <p class="title">是否设置自定义宽度</p>
+            <a-radio-group v-model:value="configInfo.domConfig.isCustomWidth">
+                <a-radio :value="true">是</a-radio>
+                <a-radio :value="false">否</a-radio>
+            </a-radio-group>
+        </div>
+        <div class="config-info" v-if="configInfo.domConfig.isCustomWidth">
+            <p class="title">自定义宽度</p>
+            <a-input-number v-model:value="configInfo.domConfig.customWidth" class="width100" :min="1" :max="24"/>
+            <p class="tip">建议设置6，12，18，24</p>
+        </div>
         <component :is="getDomType()"></component>
     </div>
     <div v-else class="config-module">
@@ -52,6 +64,9 @@ export default {
     }
     .width100{
         width: 100%;
+    }
+    .tip{
+        color: red;
     }
 }
 </style>

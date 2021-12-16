@@ -33,7 +33,7 @@
             <a-input-number v-model:value="configInfo.domConfig.min" class="width100"/>
         </div>
         <div class="config-info" v-if="configInfo.domConfig.isSection">
-            <p class="title">区间最小值</p>
+            <p class="title">区间最da值</p>
             <a-input-number v-model:value="configInfo.domConfig.max" class="width100"/>
         </div> -->
     </template>

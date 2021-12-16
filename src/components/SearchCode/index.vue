@@ -3,13 +3,13 @@
         <a-form>
             <a-row :gutter="[layoutConfig.horizontalGutter, layoutConfig.verticalGutter]">
                 <template v-for="item in list" :key="item.type" >
-                    <a-col :span="24/layoutConfig.columnCount" v-if="!(layoutConfig.isExtend && item.isExtend)">
+                    <a-col :span="(item.isCustomWidth && item.customWidth) || (24/layoutConfig.columnCount)" v-if="!(layoutConfig.isExtend && item.isExtend)">
                         <component :is="item.type + 'Component'" :config="item"></component>
                     </a-col>
                 </template>
                 <template  v-if="searchState">
                     <template v-for="item in list" :key="item.type">
-                        <a-col :span="24/layoutConfig.columnCount" v-if="layoutConfig.isExtend && item.isExtend">
+                        <a-col :span="(item.isCustomWidth && item.customWidth) || (24/layoutConfig.columnCount)" v-if="layoutConfig.isExtend && item.isExtend">
                             <component :is="item.type + 'Component'" :config="item"></component>
                         </a-col>
                     </template>
