@@ -10,17 +10,32 @@
         </a-select>
     </div>
     <template v-if="configInfo.domConfig.inputType === 'number'">
-        <div class="config-info">
+        <!-- <div class="config-info">
             <p class="title">是否为区间</p>
             <a-radio-group v-model:value="configInfo.domConfig.isSection">
                 <a-radio :value="true">是</a-radio>
                 <a-radio :value="false">否</a-radio>
             </a-radio-group>
+        </div> -->
+        <div class="config-info" v-if="configInfo.domConfig.isSection">
+            <p class="title">精度</p>
+            <a-select
+            v-model:value="configInfo.domConfig.precision"
+            style="width:100%"
+        >
+            <a-select-option :value="0">整数</a-select-option>
+            <a-select-option :value="1">保留一位小数</a-select-option>
+            <a-select-option :value="2">保留两位小数</a-select-option>
+        </a-select>
+        </div>
+        <!-- <div class="config-info" v-if="configInfo.domConfig.isSection">
+            <p class="title">区间最小值</p>
+            <a-input-number v-model:value="configInfo.domConfig.min" class="width100"/>
         </div>
         <div class="config-info" v-if="configInfo.domConfig.isSection">
             <p class="title">区间最小值</p>
-            <a-input-number v-model:value="configInfo.domConfig.min" :precision="0" :min="8" :max="48"  class="width100"/>
-        </div>
+            <a-input-number v-model:value="configInfo.domConfig.max" class="width100"/>
+        </div> -->
     </template>
 </template>
 <script>

@@ -11,7 +11,7 @@
 </template>
 <script>
 import { inject, ref } from '@vue/runtime-core'
-import LayoutConfig from './layoutConfig.vue'
+import LayoutConfig from './layoutConfig/index.vue'
 import DomConfig from './domConfig/index.vue'
 export default {
     components: {

@@ -9,10 +9,11 @@
 import { ref } from '@vue/reactivity'
 import { inject } from '@vue/runtime-core'
 import { cloneDeep } from '@antv/x6/lib/util/object/object'
+import defaultDomConfig from '../../config/defaultDomConfig'
 export default {
     setup () {
         const list = ref([{
-            name: '输入框(input)',
+            name: '输入框',
             type: 'input'
         }])
         // key的子增加索引
@@ -20,21 +21,15 @@ export default {
 
         const configInfo = inject('configInfo')
 
-        const setInput = (data) => {
-            data.inputType = 'text'
-            data.isSection = false
-        }
-
         const onAddRenderList = (item) => {
-            const typeFn = {
-                input: setInput
-            }
             const cloneItem = cloneDeep(item)
-            delete cloneItem.name
             cloneItem.key = `value${valueIndex++}`
             cloneItem.isExtend = false
-            typeFn[item.type] && typeFn[item.type](cloneItem)
-            configInfo.renderList.push(cloneItem)
+            // typeFn[item.type] && typeFn[item.type](cloneItem)
+            configInfo.renderList.push({
+                ...cloneItem,
+                ...defaultDomConfig[item.type]
+            })
         }
 
         return {

@@ -3,7 +3,7 @@
         <!-- 组件公共配置 -->
         <div class="config-info">
             <p class="title">默认标题</p>
-            <a-input v-model:value="configInfo.domConfig.placeholder" class="width100"/>
+            <a-input v-model:value="configInfo.domConfig.name" class="width100"/>
         </div>
         <div class="config-info">
             <p class="title">标题字段名称</p>

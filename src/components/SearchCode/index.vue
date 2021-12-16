@@ -1,30 +1,39 @@
 <template>
     <div>
         <a-form>
-            {{list}}
             <a-row :gutter="[layoutConfig.horizontalGutter, layoutConfig.verticalGutter]">
-                <a-col v-for="item in list" :key="item.type" :span="24/layoutConfig.columnCount">
-                    <div @click="onClickFormItem(item)" :class="{isActive: isConfig && (item.key === isActiveKey) }">
-                         <a-form-item  :label="item.placeholder || '默认标题'" v-if="layoutConfig.isLabel">
-                            <a-input :size="layoutConfig.size" :disabled="isConfig"></a-input>
-                        </a-form-item>
-                        <a-input :size="layoutConfig.size" :disabled="isConfig" v-else :placeholder="item.placeholder || '默认标题'"></a-input>
-                    </div>
+                <template v-for="item in list" :key="item.type" >
+                    <a-col :span="24/layoutConfig.columnCount" v-if="!(layoutConfig.isExtend && item.isExtend)">
+                        <component :is="item.type + 'Component'" :config="item"></component>
+                    </a-col>
+                </template>
+                <template  v-if="searchState">
+                    <template v-for="item in list" :key="item.type">
+                        <a-col :span="24/layoutConfig.columnCount" v-if="layoutConfig.isExtend && item.isExtend">
+                            <component :is="item.type + 'Component'" :config="item"></component>
+                        </a-col>
+                    </template>
+                </template>
+                <a-col :span="24/layoutConfig.columnCount">
+                    <a-button type="text" v-if="layoutConfig.isExtend" @click="setSearchState">{{searchState?'收缩':'展开'}}</a-button>
+                    <a-button type="primary" :size="layoutConfig.size" style="margin-right:10px;">搜索</a-button>
+                    <a-button :size="layoutConfig.size">重置</a-button>
                 </a-col>
             </a-row>
         </a-form>
+        {{searchObj}}
     </div>
 </template>
 <script>
 import { reactive, ref } from '@vue/reactivity'
 import defaultLayoutConfig from './config/defaultLayoutConfig'
-import { inject } from '@vue/runtime-core'
+import inputComponent from './components/input.vue'
+import { provide } from '@vue/runtime-core'
 export default {
+    components: {
+        inputComponent
+    },
     props: {
-        isConfig: {
-            type: Boolean,
-            default: false
-        },
         list: {
             type: Array,
             default: () => []
@@ -35,48 +44,48 @@ export default {
         }
     },
     setup (props) {
-        const layoutConfig = props.isConfig ? reactive(props.layout) : reactive({
+        // 布局配置
+        const layoutConfig = reactive({
             ...defaultLayoutConfig,
             ...props.layout
         })
+        provide('layoutConfig', layoutConfig)
 
-        const setDomConfig = inject('setDomConfig', () => {})
-        // 在config下设置参数信息函数
-
-        // 当前选中的节点
-        const isActiveKey = ref('')
-
-        // item点击事件
-        const onClickFormItem = (item) => {
-            props.isConfig && setActiveAndInject(item)
+        // 搜索对象
+        const searchObj = reactive({
+            base: {},
+            extend: {}
+        })
+        const setSearchObj = () => {
+            console.log(layoutConfig)
+            console.log(props.list)
+            props.list.forEach(item => {
+                searchObj[(layoutConfig.isExtend && item.isExtend) ? 'extend' : 'base'][item.key] = ''
+            })
         }
-        // 设置样式并传递数据
-        const setActiveAndInject = (item) => {
-            isActiveKey.value = item.key
-            setDomConfig(item)
+        setSearchObj()
+        provide('searchObj', searchObj)
+
+        // 展开收缩状态以及函数
+        const searchState = ref(false)
+        const setSearchState = () => {
+            searchState.value = !searchState.value
         }
 
         return {
             layoutConfig,
-            onClickFormItem,
-            isActiveKey
+            searchObj,
+            searchState,
+            setSearchState
         }
     }
 }
 </script>
 <style lang="less" scoped>
-@import "~ant-design-vue/lib/style/index";
-
-.isActive{
-    position: relative;
-    &::after{
-        width: calc(~'100% + 6px');
-        height: calc(~'100% + 6px');
-        content: '';
-        position: absolute;
-        top: -3px;
-        left: -3px;
-        border: 1px solid @primary-color;
-    }
+&:deep(.ant-form-item){
+    margin-bottom: 0;
+}
+&:deep(.ant-form-item-label > label){
+    height: 100%;
 }
 </style>

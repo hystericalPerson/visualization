@@ -4,7 +4,7 @@ const config = {
     verticalGutter: 12, // 垂直间距
     horizontalGutter: 16, // 水平间距
     size: 'large',
-    isLabel: true,
+    isLabel: false,
     isExtend: false,
     extendName: '展开'
 }

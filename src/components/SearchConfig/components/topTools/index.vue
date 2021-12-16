@@ -12,17 +12,21 @@
             wrap-class-name="full-modal"
             :footer="null"
         >
-            <p>Some contents...</p>
-            <p>Some contents...</p>
-            <p>Some contents...</p>
+            <searchCode :list="configInfo.renderList" :layout="configInfo.layoutConfig" v-if="visible"></searchCode>
         </a-modal>
     </div>
 </template>
 <script>
 import { ref } from '@vue/reactivity'
+import searchCode from '@/components/SearchCode/index.vue'
+import { inject } from '@vue/runtime-core'
 export default {
+    components: {
+        searchCode
+    },
     setup () {
         const visible = ref(false)
+        const configInfo = inject('configInfo')
 
         const onPreview = () => {
             visible.value = true
@@ -30,7 +34,8 @@ export default {
 
         return {
             visible,
-            onPreview
+            onPreview,
+            configInfo
         }
     }
 }

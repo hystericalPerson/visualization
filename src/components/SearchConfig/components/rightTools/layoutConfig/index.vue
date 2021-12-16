@@ -45,10 +45,6 @@
                 <a-radio :value="false">否</a-radio>
             </a-radio-group>
         </div>
-        <div class="config-info" v-if="configInfo.layoutConfig.isExtend">
-            <p class="title">拓展搜索文案</p>
-            <a-input v-model:value="configInfo.layoutConfig.extendName" :precision="0" :min="8" :max="48" class="width100"/>
-        </div>
     </div>
 </template>
 <script>
