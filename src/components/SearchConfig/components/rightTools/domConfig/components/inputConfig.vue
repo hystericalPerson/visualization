@@ -10,13 +10,13 @@
         </a-select>
     </div>
     <template v-if="configInfo.domConfig.inputType === 'number'">
-        <!-- <div class="config-info">
+        <div class="config-info">
             <p class="title">是否为区间</p>
             <a-radio-group v-model:value="configInfo.domConfig.isSection">
                 <a-radio :value="true">是</a-radio>
                 <a-radio :value="false">否</a-radio>
             </a-radio-group>
-        </div> -->
+        </div>
         <div class="config-info" v-if="configInfo.domConfig.isSection">
             <p class="title">精度</p>
             <a-select

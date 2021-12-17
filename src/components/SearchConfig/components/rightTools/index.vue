@@ -52,6 +52,7 @@ export default {
         text-align: center;
         cursor: pointer;
         border-bottom: 1px solid #E6E6E6;
+        margin-bottom: 0;
     }
     .active{
         color: white;
