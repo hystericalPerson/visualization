@@ -5,6 +5,13 @@
             :disabled="true"
             :placeholder="configInfo.layoutConfig.isLabel ? '' : (config.name || '默认标题')"
         ></a-input>
+        <span v-if="config.isSection" style="margin:0 5px;">~</span>
+        <a-input
+            v-if="config.isSection"
+            :size="configInfo.layoutConfig.size"
+            :disabled="true"
+            :placeholder="configInfo.layoutConfig.isLabel ? '' : (config.name || '默认标题')"
+        ></a-input>
     </a-form-item>
 </template>
 <script>
@@ -25,3 +32,9 @@ export default {
     }
 }
 </script>
+<style lang="less" scoped>
+&:deep(.ant-form-item-control-input-content){
+    display: flex;
+    align-items: center;
+}
+</style>

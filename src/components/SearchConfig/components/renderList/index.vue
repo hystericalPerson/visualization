@@ -4,8 +4,11 @@
             <!-- {{configInfo.renderList}} -->
             <a-row :gutter="[configInfo.layoutConfig.horizontalGutter, configInfo.layoutConfig.verticalGutter]">
                 <a-col v-for="item in configInfo.renderList" :key="item.type" :span="(item.isCustomWidth && item.customWidth) || (24/configInfo.layoutConfig.columnCount)">
-                    <div @click="onClickFormItem(item)" :class="{isActive: item.key === isActiveKey }">
-                        <component :is="item.type + 'Components'" :config="item"></component>
+                    <div @click="onClickFormItem(item)" :class="{isActive: item.key === isActiveKey }" style="height:100%;">
+                        <div v-if="item.isSlot" class="slot">
+                            插槽
+                        </div>
+                        <component :is="item.type + 'Components'" :config="item" v-else></component>
                     </div>
                 </a-col>
             </a-row>
@@ -71,5 +74,13 @@ export default {
 }
 .render-box{
     padding: 10px;
+}
+.slot{
+    height: 100%;
+    min-height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: @warning-color 1px solid;
 }
 </style>

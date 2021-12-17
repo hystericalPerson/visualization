@@ -28,7 +28,18 @@
             <a-input-number v-model:value="configInfo.domConfig.customWidth" class="width100" :min="1" :max="24"/>
             <p class="tip">建议设置6，12，18，24</p>
         </div>
+        <div class="config-info">
+            <p class="title">是否需要插槽</p>
+            <a-radio-group v-model:value="configInfo.domConfig.isSlot">
+                <a-radio :value="true">是</a-radio>
+                <a-radio :value="false">否</a-radio>
+            </a-radio-group>
+            <p class="tip">插槽名称为字段名称</p>
+        </div>
         <component :is="getDomType()"></component>
+         <p>
+        {{configInfo.domConfig}}
+        </p>
     </div>
     <div v-else class="config-module">
         请先选择节点后进行配置
@@ -47,15 +58,25 @@ export default {
         const getDomType = () => {
             return configInfo.domConfig.type + 'Config'
         }
+        const domHeight = (document.getElementById('main').clientHeight - 40) + 'px'
+        console.log(domHeight)
 
         return {
             configInfo,
-            getDomType
+            getDomType,
+            domHeight
         }
     }
 }
 </script>
 <style lang="less" scoped>
+
+.config-module{
+    padding: 15px 0;
+    text-align: center;
+    overflow: auto;
+    height: v-bind(domHeight);
+}
 .config-info{
     text-align: left;
     margin: 0 15px 20px;
@@ -65,8 +86,8 @@ export default {
     .width100{
         width: 100%;
     }
-    .tip{
-        color: red;
-    }
+}
+&:deep(.tip){
+    color: red;
 }
 </style>

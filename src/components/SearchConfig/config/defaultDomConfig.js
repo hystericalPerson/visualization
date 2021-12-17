@@ -3,7 +3,8 @@ const config = {
     common: {
         isExtend: false,
         isCustomWidth: false,
-        customWidth: 6
+        customWidth: 6,
+        isSlot: false
     },
     input: {
         inputType: 'text',

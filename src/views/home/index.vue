@@ -1,6 +1,5 @@
 <template>
     <div class="content">
-        <a-button type="primary">11111111111</a-button>
         <a-list :grid="{ gutter: 16, column: 4 }" :data-source="data">
         <template #renderItem="{ item }">
             <a-list-item>
@@ -31,24 +30,16 @@ export default {
     setup () {
         const router = useRouter()
         const onJumpPage = (item) => {
-            // if (item.desc) {
-            //     router.push(item.path)
-            // } else {
-            //     notification.open({
-            //         message: '提示',
-            //         description: '暂未实现'
-            //     })
-            //     hf()
-            // }
-            console.log(less)
-            less.modifyVars({
-                '@primary-color': '#ffffff'
-            })
+            if (item.desc) {
+                router.push(item.path)
+            } else {
+                notification.open({
+                    message: '提示',
+                    description: '暂未实现'
+                })
+            }
         }
 
-        const hf = () => {
-
-        }
         return {
             data,
             onJumpPage

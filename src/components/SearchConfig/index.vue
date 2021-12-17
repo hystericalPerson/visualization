@@ -1,7 +1,7 @@
 <template>
     <div class="search-content">
         <TopTools class="top"></TopTools>
-        <div class="main">
+        <div class="main" id="main">
             <LeftComponents class="left"></LeftComponents>
             <RenderList class="list"></RenderList>
             <RightTools class="right"></RightTools>

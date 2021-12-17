@@ -20,7 +20,6 @@ export default {
     },
     setup () {
         const configInfo = inject('configInfo')
-
         // tab
         const tab = ref('layout')
         // 切换tab

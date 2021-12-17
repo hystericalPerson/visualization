@@ -4,13 +4,19 @@
             <a-row :gutter="[layoutConfig.horizontalGutter, layoutConfig.verticalGutter]">
                 <template v-for="item in list" :key="item.type" >
                     <a-col :span="(item.isCustomWidth && item.customWidth) || (24/layoutConfig.columnCount)" v-if="!(layoutConfig.isExtend && item.isExtend)">
-                        <component :is="item.type + 'Component'" :config="item"></component>
+                        <slot name="value1" v-if="item.isSlot">
+                            <component :is="item.type + 'Component'" :config="item"></component>
+                        </slot>
+                        <component :is="item.type + 'Component'" :config="item" v-else></component>
                     </a-col>
                 </template>
                 <template  v-if="searchState">
                     <template v-for="item in list" :key="item.type">
                         <a-col :span="(item.isCustomWidth && item.customWidth) || (24/layoutConfig.columnCount)" v-if="layoutConfig.isExtend && item.isExtend">
-                            <component :is="item.type + 'Component'" :config="item"></component>
+                            <slot name="value1" v-if="item.isSlot">
+                                <component :is="item.type + 'Component'" :config="item"></component>
+                            </slot>
+                            <component :is="item.type + 'Component'" :config="item" v-else></component>
                         </a-col>
                     </template>
                 </template>
@@ -60,7 +66,12 @@ export default {
             console.log(layoutConfig)
             console.log(props.list)
             props.list.forEach(item => {
-                searchObj[(layoutConfig.isExtend && item.isExtend) ? 'extend' : 'base'][item.key] = ''
+                if (item.isSection) {
+                    searchObj[(layoutConfig.isExtend && item.isExtend) ? 'extend' : 'base'][item.minKey] = ''
+                    searchObj[(layoutConfig.isExtend && item.isExtend) ? 'extend' : 'base'][item.maxKey] = ''
+                } else {
+                    searchObj[(layoutConfig.isExtend && item.isExtend) ? 'extend' : 'base'][item.key] = ''
+                }
             })
         }
         setSearchObj()

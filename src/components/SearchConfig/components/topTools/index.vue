@@ -12,7 +12,8 @@
             wrap-class-name="full-modal"
             :footer="null"
         >
-            <searchCode :list="configInfo.renderList" :layout="configInfo.layoutConfig" v-if="visible"></searchCode>
+            <searchCode :list="configInfo.renderList" :layout="configInfo.layoutConfig" v-if="visible">
+            </searchCode>
         </a-modal>
     </div>
 </template>
