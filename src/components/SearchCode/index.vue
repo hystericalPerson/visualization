@@ -34,10 +34,12 @@
 import { reactive, ref } from '@vue/reactivity'
 import defaultLayoutConfig from './config/defaultLayoutConfig'
 import inputComponent from './components/input.vue'
+import dateComponent from './components/date.vue'
 import { provide } from '@vue/runtime-core'
 export default {
     components: {
-        inputComponent
+        inputComponent,
+        dateComponent
     },
     props: {
         list: {

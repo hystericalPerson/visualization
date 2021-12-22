@@ -48,9 +48,11 @@
 <script>
 import { inject } from '@vue/runtime-core'
 import inputConfig from './components/inputConfig.vue'
+import dateConfig from './components/dateConfig.vue'
 export default {
     components: {
-        inputConfig
+        inputConfig,
+        dateConfig
     },
     setup () {
         const configInfo = inject('configInfo')

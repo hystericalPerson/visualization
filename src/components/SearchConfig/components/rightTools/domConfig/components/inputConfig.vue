@@ -35,7 +35,7 @@
                 <a-radio :value="true">是</a-radio>
                 <a-radio :value="false">否</a-radio>
             </a-radio-group>
-            <p class="tip">有区间时，字段名称失效</p>
+            <p class="tip">有区间时，标题字段名称失效</p>
         </div>
         <template v-if="configInfo.domConfig.isSection">
             <div class="config-info" v-if="configInfo.domConfig.isSection">

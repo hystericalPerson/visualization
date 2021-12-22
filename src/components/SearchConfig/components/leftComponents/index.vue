@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="module" v-for="item in list" :key="item.type">
-            <p class="title" @click="onAddRenderList(item)">{{item.name}}</p>
+        <div class="module">
+            <p class="title" @click="onAddRenderList(item)" v-for="item in list" :key="item.type">{{item.name}}</p>
         </div>
     </div>
 </template>
@@ -15,6 +15,9 @@ export default {
         const list = ref([{
             name: '输入框',
             type: 'input'
+        }, {
+            name: '日期',
+            type: 'date'
         }])
         // key的子增加索引
         let valueIndex = 1

@@ -25,7 +25,10 @@ import {
     Card,
     Row,
     Col,
-    InputNumber
+    InputNumber,
+    RangePicker,
+    DatePicker,
+    ConfigProvider
 } from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.less'
 import './assets/css/common.less'
@@ -36,9 +39,9 @@ require('./mock')
 
 const app = createApp(App)
 app.config.productionTip = false
-app.use(Button).use(Layout).use(Menu).use(Tabs).use(TabPane).use(MenuItem).use(Dropdown).use(Card).use(Row).use(Col)
-    .use(List).use(Alert).use(Input).use(Divider).use(Spin).use(Radio).use(RadioGroup).use(Grid).use(Select)
-    .use(InputNumber)
+app.use(Button).use(Layout).use(Menu).use(Tabs).use(TabPane).use(MenuItem).use(Dropdown).use(Card).use(Row).use(Col).use(DatePicker)
+    .use(List).use(Alert).use(Input).use(Divider).use(Spin).use(Radio).use(RadioGroup).use(Grid).use(Select).use(RangePicker)
+    .use(InputNumber).use(ConfigProvider)
     .use(Modal).use(Table).use(Form).use(router).use(store).mount('#app')
 
 setDefaultSetting()

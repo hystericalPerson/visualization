@@ -12,6 +12,9 @@ const config = {
         precision: 0,
         min: 0,
         max: 0
+    },
+    date: {
+
     }
 }
 export default config
