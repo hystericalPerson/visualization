@@ -1,6 +1,5 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import './registerServiceWorker'
 import router from './router'
 import {
     Button,
@@ -24,16 +23,9 @@ import {
     Form
 } from 'ant-design-vue'
 import 'ant-design-vue/dist/antd.less'
-import './assets/css/common.less'
-import store from './store'
-import setDefaultSetting from './config/index.js'
-
-require('./mock')
 
 const app = createApp(App)
 app.config.productionTip = false
 app.use(Button).use(Layout).use(Menu).use(Tabs).use(TabPane).use(MenuItem).use(Dropdown)
     .use(List).use(Alert).use(Input).use(Divider).use(Spin).use(Radio).use(RadioGroup).use(Grid).use(Select)
-    .use(Modal).use(Table).use(Form).use(router).use(store).mount('#app')
-
-setDefaultSetting()
+    .use(Modal).use(Table).use(Form).use(router).mount('#app')
