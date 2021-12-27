@@ -19,10 +19,12 @@
 import { inject, provide, ref } from '@vue/runtime-core'
 import inputComponents from './components/input.vue'
 import dateComponents from './components/date.vue'
+import selectComponents from './components/select.vue'
 export default {
     components: {
         inputComponents,
-        dateComponents
+        dateComponents,
+        selectComponents
     },
     setup () {
         const configInfo = inject('configInfo')
@@ -68,6 +70,8 @@ export default {
     }
 }
 &:deep(.ant-input[disabled]),
+&:deep(.ant-select-disabled.ant-select:not(.ant-select-customize-input) .ant-select-selector),
+&:deep(.ant-select-disabled.ant-select:not(.ant-select-customize-input) .ant-select-selector input),
 &:deep(.ant-calendar-range-picker-input[disabled]),
 &:deep(.ant-input-disabled){
     background: white;

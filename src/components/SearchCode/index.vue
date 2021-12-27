@@ -4,19 +4,13 @@
             <a-row :gutter="[layoutConfig.horizontalGutter, layoutConfig.verticalGutter]">
                 <template v-for="item in list" :key="item.type" >
                     <a-col :span="(item.isCustomWidth && item.customWidth) || (24/layoutConfig.columnCount)" v-if="!(layoutConfig.isExtend && item.isExtend)">
-                        <slot name="value1" v-if="item.isSlot">
-                            <component :is="item.type + 'Component'" :config="item"></component>
-                        </slot>
-                        <component :is="item.type + 'Component'" :config="item" v-else></component>
+                        <component :is="item.type + 'Component'" :config="item"></component>
                     </a-col>
                 </template>
                 <template  v-if="searchState">
                     <template v-for="item in list" :key="item.type">
                         <a-col :span="(item.isCustomWidth && item.customWidth) || (24/layoutConfig.columnCount)" v-if="layoutConfig.isExtend && item.isExtend">
-                            <slot name="value1" v-if="item.isSlot">
-                                <component :is="item.type + 'Component'" :config="item"></component>
-                            </slot>
-                            <component :is="item.type + 'Component'" :config="item" v-else></component>
+                            <component :is="item.type + 'Component'" :config="item"></component>
                         </a-col>
                     </template>
                 </template>
@@ -35,11 +29,13 @@ import { reactive, ref } from '@vue/reactivity'
 import defaultLayoutConfig from './config/defaultLayoutConfig'
 import inputComponent from './components/input.vue'
 import dateComponent from './components/date.vue'
+import selectComponent from './components/select.vue'
 import { provide } from '@vue/runtime-core'
 export default {
     components: {
         inputComponent,
-        dateComponent
+        dateComponent,
+        selectComponent
     },
     props: {
         list: {
@@ -64,16 +60,31 @@ export default {
             base: {},
             extend: {}
         })
+        const setDate = (item) => {
+            searchObj[(layoutConfig.isExtend && item.isExtend) ? 'extend' : 'base'][item.startKey] = ''
+            searchObj[(layoutConfig.isExtend && item.isExtend) ? 'extend' : 'base'][item.endKey] = ''
+            console.log(searchObj)
+        }
+        const setInput = (item) => {
+            if (item.isSection) {
+                searchObj[(layoutConfig.isExtend && item.isExtend) ? 'extend' : 'base'][item.minKey] = ''
+                searchObj[(layoutConfig.isExtend && item.isExtend) ? 'extend' : 'base'][item.maxKey] = ''
+            } else {
+                searchObj[(layoutConfig.isExtend && item.isExtend) ? 'extend' : 'base'][item.key] = ''
+            }
+        }
+        const setSelect = (item) => {
+            console.log(item)
+            searchObj[(layoutConfig.isExtend && item.isExtend) ? 'extend' : 'base'][item.key] = null
+        }
         const setSearchObj = () => {
-            console.log(layoutConfig)
-            console.log(props.list)
+            const objFn = {
+                date: setDate,
+                input: setInput,
+                select: setSelect
+            }
             props.list.forEach(item => {
-                if (item.isSection) {
-                    searchObj[(layoutConfig.isExtend && item.isExtend) ? 'extend' : 'base'][item.minKey] = ''
-                    searchObj[(layoutConfig.isExtend && item.isExtend) ? 'extend' : 'base'][item.maxKey] = ''
-                } else {
-                    searchObj[(layoutConfig.isExtend && item.isExtend) ? 'extend' : 'base'][item.key] = ''
-                }
+                objFn[item.type](item)
             })
         }
         setSearchObj()

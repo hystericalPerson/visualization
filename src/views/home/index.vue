@@ -40,9 +40,14 @@ export default {
             }
         }
 
+        const click = (e) => {
+            console.log(111)
+        }
+
         return {
             data,
-            onJumpPage
+            onJumpPage,
+            click
         }
     }
 }

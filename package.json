@@ -10,6 +10,7 @@
   "dependencies": {
     "@antv/x6": "^1.24.5",
     "@antv/x6-vue-shape": "^1.2.10",
+    "@vue/babel-plugin-jsx": "^1.1.1",
     "ant-design-vue": "^2.2.8",
     "axios": "^0.24.0",
     "compression-webpack-plugin": "^5.0.1",

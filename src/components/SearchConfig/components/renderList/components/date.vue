@@ -3,7 +3,7 @@
         <a-range-picker
             :size="configInfo.layoutConfig.size"
             :disabled="true"
-            :placeholder="[`开始${configInfo.layoutConfig.isLabel ? '' : (config.name || '默认标题')}`,`结束${configInfo.layoutConfig.isLabel ? '' : (config.name || '默认标题')}`]"
+            :placeholder="[`${configInfo.layoutConfig.isLabel ? '' : (config.startName || '默认标题')}`,`${configInfo.layoutConfig.isLabel ? '' : (config.endName || '默认标题')}`]"
         />
     </a-form-item>
 </template>

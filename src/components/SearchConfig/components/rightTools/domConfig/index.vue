@@ -2,14 +2,6 @@
     <div v-if="configInfo.domConfig" class="config-module">
         <!-- 组件公共配置 -->
         <div class="config-info">
-            <p class="title">默认标题</p>
-            <a-input v-model:value="configInfo.domConfig.name" class="width100"/>
-        </div>
-        <div class="config-info">
-            <p class="title">标题字段名称</p>
-            <a-input v-model:value="configInfo.domConfig.key" class="width100"/>
-        </div>
-        <div class="config-info">
             <p class="title">是否为扩展搜索</p>
             <a-radio-group v-model:value="configInfo.domConfig.isExtend">
                 <a-radio :value="true">是</a-radio>
@@ -25,17 +17,17 @@
         </div>
         <div class="config-info" v-if="configInfo.domConfig.isCustomWidth">
             <p class="title">自定义宽度</p>
-            <a-input-number v-model:value="configInfo.domConfig.customWidth" class="width100" :min="1" :max="24"/>
+            <a-input-number v-model:value="configInfo.domConfig.customWidth" class="width100" :min="4" :max="24"/>
             <p class="tip">建议设置6，12，18，24</p>
         </div>
-        <div class="config-info">
+        <!-- <div class="config-info">
             <p class="title">是否需要插槽</p>
             <a-radio-group v-model:value="configInfo.domConfig.isSlot">
                 <a-radio :value="true">是</a-radio>
                 <a-radio :value="false">否</a-radio>
             </a-radio-group>
             <p class="tip">插槽名称为字段名称</p>
-        </div>
+        </div> -->
         <component :is="getDomType()"></component>
          <p>
         {{configInfo.domConfig}}
@@ -49,10 +41,12 @@
 import { inject } from '@vue/runtime-core'
 import inputConfig from './components/inputConfig.vue'
 import dateConfig from './components/dateConfig.vue'
+import selectConfig from './components/selectConfig.vue'
 export default {
     components: {
         inputConfig,
-        dateConfig
+        dateConfig,
+        selectConfig
     },
     setup () {
         const configInfo = inject('configInfo')

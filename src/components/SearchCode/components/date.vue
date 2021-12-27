@@ -1,7 +1,11 @@
 <template>
     <div>
         <a-form-item  :label="layoutConfig.isLabel ? (config.name || '默认标题') : ''">
-            123
+            <a-range-picker
+                @change="onChange"
+                :size="layoutConfig.size"
+                :placeholder="[`${layoutConfig.isLabel ? '' : (config.startName || '默认标题')}`,`${layoutConfig.isLabel ? '' : (config.endName || '默认标题')}`]"
+            />
         </a-form-item>
         <!-- <a-input :size="layoutConfig.size" v-else :placeholder="config.placeholder || '默认标题'"></a-input> -->
     </div>
@@ -15,13 +19,19 @@ export default {
             default: () => {}
         }
     },
-    setup () {
+    setup (props) {
         const layoutConfig = inject('layoutConfig')
         const searchObj = inject('searchObj')
 
+        const onChange = (data, dateString) => {
+            searchObj[(layoutConfig.isExtend && props.config.isExtend) ? 'extend' : 'base'][props.config.startKey] = dateString[0]
+            searchObj[(layoutConfig.isExtend && props.config.isExtend) ? 'extend' : 'base'][props.config.endKey] = dateString[1]
+        }
+
         return {
             layoutConfig,
-            searchObj
+            searchObj,
+            onChange
         }
     }
 }

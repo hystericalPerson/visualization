@@ -1,7 +1,6 @@
 <template>
     <div class="top-content">
         <div>
-            <a-button class="button" @click="onPreview">预览</a-button>
             <a-button class="button" type="primary">导出布局配置</a-button>
             <a-button class="button" type="primary">导出表单配置</a-button>
         </div>

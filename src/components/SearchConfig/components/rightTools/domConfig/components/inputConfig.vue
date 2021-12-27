@@ -1,5 +1,13 @@
 <template>
     <div class="config-info">
+        <p class="title">默认标题</p>
+        <a-input v-model:value="configInfo.domConfig.name" class="width100"/>
+    </div>
+    <div class="config-info">
+        <p class="title">标题字段名称</p>
+        <a-input v-model:value="configInfo.domConfig.key" class="width100"/>
+    </div>
+    <div class="config-info">
         <p class="title">输入框类型</p>
         <a-select
             v-model:value="configInfo.domConfig.inputType"

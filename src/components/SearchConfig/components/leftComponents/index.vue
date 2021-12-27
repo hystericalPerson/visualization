@@ -18,15 +18,17 @@ export default {
         }, {
             name: '日期',
             type: 'date'
+        }, {
+            name: '下拉框',
+            type: 'select'
         }])
-        // key的子增加索引
-        let valueIndex = 1
 
         const configInfo = inject('configInfo')
+        const defaultKey = {}
 
         const onAddRenderList = (item) => {
             const cloneItem = cloneDeep(item)
-            cloneItem.key = `value${valueIndex++}`
+            cloneItem.key = item.type + (defaultKey[item.type] ? ++defaultKey[item.type] : (defaultKey[item.type] = 1))
             configInfo.renderList.push({
                 ...cloneItem,
                 ...defaultDomConfig.common,
@@ -45,11 +47,11 @@ export default {
 @import "~ant-design-vue/lib/style/index";
 .module{
     width: 100%;
-    height: 60px;
     padding: 0 15px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    flex-wrap: wrap;
     .title{
         width: 110px;
         height: 40px;
@@ -62,6 +64,7 @@ export default {
         margin-bottom: 0;
         border: 1px solid @primary-color;
         cursor: pointer;
+        margin: 10px 10px;
     }
 }
 </style>

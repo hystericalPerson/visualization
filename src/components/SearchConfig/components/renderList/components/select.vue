@@ -1,17 +1,15 @@
 <template>
     <a-form-item  :label="configInfo.layoutConfig.isLabel ? (config.name || '默认标题') : ''">
-        <a-input
+        <!-- <a-input
             :size="configInfo.layoutConfig.size"
             :disabled="true"
             :placeholder="configInfo.layoutConfig.isLabel ? '' : (config.name || '默认标题')"
-        ></a-input>
-        <span v-if="config.isSection && config.inputType!=='text'" style="margin:0 5px;">~</span>
-        <a-input
-            v-if="config.isSection && config.inputType!=='text'"
+        ></a-input> -->
+        <a-select
             :size="configInfo.layoutConfig.size"
             :disabled="true"
             :placeholder="configInfo.layoutConfig.isLabel ? '' : (config.name || '默认标题')"
-        ></a-input>
+        ></a-select>
     </a-form-item>
 </template>
 <script>

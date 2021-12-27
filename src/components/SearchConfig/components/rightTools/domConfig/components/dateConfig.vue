@@ -1,13 +1,19 @@
 <template>
     <div class="config-info">
-        <p class="title">输入框类型</p>
-        <a-select
-            v-model:value="configInfo.domConfig.inputType"
-            style="width:100%"
-        >
-            <a-select-option value="text">文本输入框</a-select-option>
-            <a-select-option value="number">数字输入框</a-select-option>
-        </a-select>
+        <p class="title">开始标题名称</p>
+        <a-input v-model:value="configInfo.domConfig.startName" class="width100"/>
+    </div>
+    <div class="config-info">
+        <p class="title">开始标题字段</p>
+        <a-input v-model:value="configInfo.domConfig.startKey" class="width100"/>
+    </div>
+    <div class="config-info">
+        <p class="title">结束标题名称</p>
+        <a-input v-model:value="configInfo.domConfig.endName" class="width100"/>
+    </div>
+    <div class="config-info">
+        <p class="title">结束标题字段</p>
+        <a-input v-model:value="configInfo.domConfig.endKey" class="width100"/>
     </div>
 </template>
 <script>
