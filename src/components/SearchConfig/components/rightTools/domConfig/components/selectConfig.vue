@@ -20,9 +20,20 @@
     </div>
     <a-divider />
     <div class="config-info" v-for="(item, index) in configInfo.domConfig.optionList" :key="index">
-        <p class="title">option{{index+1}}</p>
-        <a-input v-model:value="item.value" class="width100" addon-before="value" style="margin-bottom:5px;"/>
-        <a-input v-model:value="item.label" class="width100" addon-before="label"/>
+        <p class="title">
+            <span>option{{index+1}}</span>
+            <a-button type="primary"
+                @click="addOption"
+                style="margin-left:10px;"
+                v-if="index === configInfo.domConfig.optionList.length-1"
+            >新增</a-button>
+            <a-button type="danger"
+                @click="delOption(index)"
+                style="margin-left:10px;"
+            >删除</a-button>
+        </p>
+        <a-input v-model:value="item.value" type="text" class="width100" addon-before="value" style="margin-bottom:5px;"/>
+        <a-input v-model:value="item.label" type="text" class="width100" addon-before="label"/>
     </div>
 </template>
 <script>
@@ -31,8 +42,21 @@ export default {
     setup () {
         const configInfo = inject('configInfo')
 
+        const addOption = () => {
+            configInfo.domConfig.optionList.push({
+                value: `value${Math.random().toFixed(4)}`,
+                label: '展示文案'
+            })
+        }
+
+        const delOption = (index) => {
+            configInfo.domConfig.optionList.splice(index, 1)
+        }
+
         return {
-            configInfo
+            configInfo,
+            addOption,
+            delOption
         }
     }
 }

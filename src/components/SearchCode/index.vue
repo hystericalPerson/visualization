@@ -4,13 +4,15 @@
             <a-row :gutter="[layoutConfig.horizontalGutter, layoutConfig.verticalGutter]">
                 <template v-for="item in list" :key="item.type" >
                     <a-col :span="(item.isCustomWidth && item.customWidth) || (24/layoutConfig.columnCount)" v-if="!(layoutConfig.isExtend && item.isExtend)">
-                        <component :is="item.type + 'Component'" :config="item"></component>
+                        <slot :name="item.slotName" v-if="item.type==='slot'"></slot>
+                        <component :is="item.type + 'Component'" :config="item" v-else></component>
                     </a-col>
                 </template>
                 <template  v-if="searchState">
                     <template v-for="item in list" :key="item.type">
                         <a-col :span="(item.isCustomWidth && item.customWidth) || (24/layoutConfig.columnCount)" v-if="layoutConfig.isExtend && item.isExtend">
-                            <component :is="item.type + 'Component'" :config="item"></component>
+                            <slot :name="item.slotName" v-if="item.type==='slot'"></slot>
+                            <component :is="item.type + 'Component'" :config="item" v-else></component>
                         </a-col>
                     </template>
                 </template>
@@ -63,7 +65,7 @@ export default {
         const setDate = (item) => {
             searchObj[(layoutConfig.isExtend && item.isExtend) ? 'extend' : 'base'][item.startKey] = ''
             searchObj[(layoutConfig.isExtend && item.isExtend) ? 'extend' : 'base'][item.endKey] = ''
-            console.log(searchObj)
+            searchObj[(layoutConfig.isExtend && item.isExtend) ? 'extend' : 'base'][item.startKey + item.endKey] = []
         }
         const setInput = (item) => {
             if (item.isSection) {
@@ -74,8 +76,7 @@ export default {
             }
         }
         const setSelect = (item) => {
-            console.log(item)
-            searchObj[(layoutConfig.isExtend && item.isExtend) ? 'extend' : 'base'][item.key] = null
+            searchObj[(layoutConfig.isExtend && item.isExtend) ? 'extend' : 'base'][item.key] = item.mode === 'default' ? undefined : []
         }
         const setSearchObj = () => {
             const objFn = {
@@ -84,7 +85,7 @@ export default {
                 select: setSelect
             }
             props.list.forEach(item => {
-                objFn[item.type](item)
+                objFn[item.type] && objFn[item.type](item)
             })
         }
         setSearchObj()

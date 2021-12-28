@@ -20,6 +20,9 @@ const config = {
             label: '展示文案'
         }]
     },
+    slot: {
+        slotName: 'slotName'
+    },
     date: {
         startName: '开始',
         startKey: 'start',

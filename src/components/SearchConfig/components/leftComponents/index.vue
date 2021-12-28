@@ -21,6 +21,9 @@ export default {
         }, {
             name: '下拉框',
             type: 'select'
+        }, {
+            name: '插槽',
+            type: 'slot'
         }])
 
         const configInfo = inject('configInfo')

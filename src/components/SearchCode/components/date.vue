@@ -4,6 +4,7 @@
             <a-range-picker
                 @change="onChange"
                 :size="layoutConfig.size"
+                v-model:value="searchObj[(layoutConfig.isExtend && config.isExtend) ? 'extend' : 'base'][config.startKey + config.endKey]"
                 :placeholder="[`${layoutConfig.isLabel ? '' : (config.startName || '默认标题')}`,`${layoutConfig.isLabel ? '' : (config.endName || '默认标题')}`]"
             />
         </a-form-item>
@@ -11,7 +12,7 @@
     </div>
 </template>
 <script>
-import { inject } from '@vue/runtime-core'
+import { computed, inject } from '@vue/runtime-core'
 export default {
     props: {
         config: {

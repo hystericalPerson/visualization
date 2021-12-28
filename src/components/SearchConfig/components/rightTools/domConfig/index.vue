@@ -42,11 +42,13 @@ import { inject } from '@vue/runtime-core'
 import inputConfig from './components/inputConfig.vue'
 import dateConfig from './components/dateConfig.vue'
 import selectConfig from './components/selectConfig.vue'
+import slotConfig from './components/slotConfig.vue'
 export default {
     components: {
         inputConfig,
         dateConfig,
-        selectConfig
+        selectConfig,
+        slotConfig
     },
     setup () {
         const configInfo = inject('configInfo')

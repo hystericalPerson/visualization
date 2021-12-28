@@ -1,18 +1,16 @@
 <template>
     <div>
         <a-form-item  :label="layoutConfig.isLabel ? (config.name || '默认标题') : ''">
+            <a-select
+                :mode="config.mode==='default'? 'default':'multiple' "
+                :size="layoutConfig.size"
+                :placeholder="layoutConfig.isLabel ? '' : config.name"
+                v-model:value="searchObj[(layoutConfig.isExtend && config.isExtend) ? 'extend' : 'base'][config.key]"
+                style="width: 100%"
+            >
+                <a-select-option :value="item.value" v-for="(item,index) in config.optionList" :key="index">{{item.label}}</a-select-option>
+            </a-select>
 
-            <!-- text -->
-            <template v-if="config.mode === 'default'">
-                 <a-select
-                    :size="layoutConfig.size"
-                    :placeholder="layoutConfig.isLabel ? '' : config.name"
-                    v-model:value="searchObj[(layoutConfig.isExtend && config.isExtend) ? 'extend' : 'base'][config.key]"
-                    style="width: 100%"
-                >
-                    <a-select-option :value="item.value" v-for="(item,index) in config.optionList" :key="index">{{item.label}}</a-select-option>
-                </a-select>
-            </template>
         </a-form-item>
     </div>
 </template>
